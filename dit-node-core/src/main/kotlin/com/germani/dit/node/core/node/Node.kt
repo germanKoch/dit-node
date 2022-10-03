@@ -8,6 +8,8 @@ interface Node {
 
     fun getNodeType(): NodeType
 
+    fun getNodeName(): String
+
     fun process(input: Mono<NodeInput>): Mono<NodeOutput>
 
 }

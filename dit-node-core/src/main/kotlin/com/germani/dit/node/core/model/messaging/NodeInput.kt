@@ -2,17 +2,17 @@ package com.germani.dit.node.core.model.messaging
 
 //TODO: make separate class for multiple
 data class NodeInput(
-    private val messages: List<com.germani.dit.node.core.model.messaging.Message>
+    private val messages: List<Message>,
 ) {
-    fun getMessage(): com.germani.dit.node.core.model.messaging.Message {
+    fun getMessage(): Message {
         return messages.single()
     }
 
-    fun getMessages(): List<com.germani.dit.node.core.model.messaging.Message> {
+    fun getMessages(): List<Message> {
         return ArrayList(messages)
     }
 
-    fun combine(node: com.germani.dit.node.core.model.messaging.NodeInput): com.germani.dit.node.core.model.messaging.NodeInput {
-        return com.germani.dit.node.core.model.messaging.NodeInput(this.messages + node.messages)
+    fun combine(node: NodeInput): NodeInput {
+        return NodeInput(this.messages + node.messages)
     }
 }

@@ -2,9 +2,9 @@ package com.germani.dit.node.core.service.impl
 
 import com.germani.dit.node.core.model.messaging.NodeInput
 import com.germani.dit.node.core.model.messaging.NodeOutput
-import com.germani.dit.node.core.node.impl.ExecutableChain
-import com.germani.dit.node.core.model.preprocessing.ChainDefinition
-import com.germani.dit.node.core.model.preprocessing.NodeDefinition
+import com.germani.dit.node.core.model.node.preprocessing.ChainDefinition
+import com.germani.dit.node.core.model.node.preprocessing.NodeDefinition
+import com.germani.dit.node.core.node.ExecutableChain
 import com.germani.dit.node.core.service.ChainExecutableConstructor
 import com.germani.dit.node.core.service.NodeProvider
 import reactor.core.publisher.Mono
@@ -27,7 +27,7 @@ class ChainExecutableConstructorImpl(
     }
 
     private fun recursivelyConstructInternal(
-        input: com.germani.dit.node.core.model.messaging.NodeInput,
+        input: NodeInput,
         definition: NodeDefinition
     ): Mono<NodeOutput> {
         if (definition.isInitial()) {
@@ -44,7 +44,7 @@ class ChainExecutableConstructorImpl(
         if (parents.size > 1) {
             return nodeProvider.getNode(definition.nodeId).flatMap { node ->
                 node.process(Mono.zip(parents.map { internalIdToOutput[it.internalId]!!.map { output -> output.toInput() } }) {
-                    return@zip it.map { element -> element as com.germani.dit.node.core.model.messaging.NodeInput }
+                    return@zip it.map { element -> element as NodeInput }
                         .reduce { acc, input -> acc.combine(input) }
                 })
             }

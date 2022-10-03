@@ -1,13 +1,13 @@
 package com.germani.dit.node.core.model.messaging
 
 class NodeOutput(
-    private val message: com.germani.dit.node.core.model.messaging.Message
+    private val message: Message
 ) {
-    fun getMessage(): com.germani.dit.node.core.model.messaging.Message {
+    fun getMessage(): Message {
         return message
     }
 
-    fun toInput(): com.germani.dit.node.core.model.messaging.NodeInput {
-        return com.germani.dit.node.core.model.messaging.NodeInput(listOf(message))
+    fun toInput(): NodeInput {
+        return NodeInput(listOf(message))
     }
 }

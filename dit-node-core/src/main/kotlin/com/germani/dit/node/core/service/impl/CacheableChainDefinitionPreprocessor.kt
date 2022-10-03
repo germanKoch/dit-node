@@ -1,9 +1,9 @@
 package com.germani.dit.node.core.service.impl
 
 import com.germani.dit.node.core.model.exception.MalformedChainConfigurationException
-import com.germani.dit.node.core.model.preprocessing.ChainDefinition
-import com.germani.dit.node.core.model.preprocessing.NodeDefinition
-import com.germani.dit.node.core.model.structure.ChainUnitStructure
+import com.germani.dit.node.core.model.node.preprocessing.ChainDefinition
+import com.germani.dit.node.core.model.node.preprocessing.NodeDefinition
+import com.germani.dit.node.core.model.node.ChainUnit
 import com.germani.dit.node.core.service.ChainDefinitionPreprocessor
 import com.germani.dit.node.core.service.ChainStructureProvider
 import org.springframework.stereotype.Service
@@ -36,7 +36,7 @@ class CacheableChainDefinitionPreprocessor(
         }
 
 
-    private fun mapToDefinition(node: ChainUnitStructure): NodeDefinition {
+    private fun mapToDefinition(node: ChainUnit): NodeDefinition {
         val nodeDefinition = NodeDefinition(internalId = node.internalId, nodeId = node.nodeId)
         node.childs.forEach {
             nodeDefinition.childs.add(mapToDefinition(it))

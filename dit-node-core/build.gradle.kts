@@ -25,6 +25,12 @@ repositories {
 
 extra["testcontainersVersion"] = "1.17.3"
 
+var versions = mapOf(
+    "jslt" to "0.1.13",
+    "reactive-feign" to "3.2.5",
+    "mapstruct" to "1.5.2.Final"
+)
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -32,11 +38,20 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("com.schibsted.spt.data:jslt:${versions["jslt"]}")
+    implementation("com.playtika.reactivefeign:feign-reactor-core:${versions["reactive-feign"]}")
+    implementation("com.playtika.reactivefeign:feign-reactor-spring-configuration:${versions["reactive-feign"]}")
+    //TODO: replace to cloud later
+    implementation("com.playtika.reactivefeign:feign-reactor-webclient:${versions["reactive-feign"]}")
+    implementation("org.mapstruct:mapstruct:${versions["mapstruct"]}")
+
+    annotationProcessor("org.mapstruct:mapstruct-processor:${versions["mapstruct"]}")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.testcontainers:junit-jupiter")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 dependencyManagement {
