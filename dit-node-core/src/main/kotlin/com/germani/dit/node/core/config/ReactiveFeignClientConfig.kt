@@ -1,7 +1,7 @@
 package com.germani.dit.node.core.config
 
-import com.germani.dit.node.core.client.NodeRepoChainAdapter
-import com.germani.dit.node.core.client.NodeRepoNodeAdapter
+import com.germani.dit.node.core.client.impl.NodeRepoGraphAdapterImpl
+import com.germani.dit.node.core.client.impl.RepoNodeAdapterImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import reactivefeign.webclient.WebReactiveFeign
@@ -10,15 +10,15 @@ import reactivefeign.webclient.WebReactiveFeign
 class ReactiveFeignClientConfig {
 
     @Bean
-    fun getChainClient(): NodeRepoChainAdapter.NodeRepoChainClient {
-        return WebReactiveFeign.builder<NodeRepoChainAdapter.NodeRepoChainClient>()
-            .target(NodeRepoChainAdapter.NodeRepoChainClient::class.java, "http://localhost:8081")
+    fun gerGraphClient(): NodeRepoGraphAdapterImpl.NodeRepoGraphClient {
+        return WebReactiveFeign.builder<NodeRepoGraphAdapterImpl.NodeRepoGraphClient>()
+            .target(NodeRepoGraphAdapterImpl.NodeRepoGraphClient::class.java, "http://localhost:8081")
     }
 
     @Bean
-    fun getNodeClient(): NodeRepoNodeAdapter.NodeRepoNodeClient {
-        return WebReactiveFeign.builder<NodeRepoNodeAdapter.NodeRepoNodeClient>()
-            .target(NodeRepoNodeAdapter.NodeRepoNodeClient::class.java, "http://localhost:8081")
+    fun getNodeClient(): RepoNodeAdapterImpl.NodeRepoNodeClient {
+        return WebReactiveFeign.builder<RepoNodeAdapterImpl.NodeRepoNodeClient>()
+            .target(RepoNodeAdapterImpl.NodeRepoNodeClient::class.java, "http://localhost:8081")
     }
 
 }

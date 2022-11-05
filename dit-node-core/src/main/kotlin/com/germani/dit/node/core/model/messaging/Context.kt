@@ -4,6 +4,10 @@ class Context private constructor(
     private val data: MutableMap<String, Any> = mutableMapOf()
 ) {
 
+    fun getData(): Map<String, Any> {
+        return HashMap(data)
+    }
+
     operator fun get(key: String): Any? {
         return data[key]
     }

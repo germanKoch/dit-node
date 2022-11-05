@@ -1,11 +1,13 @@
 package com.germani.dit.node.core.model.messaging
 
 import com.germani.dit.node.core.model.exception.InvalidDataFormatException
+import com.germani.dit.node.core.model.node.ContextableString
 
 data class Message(
     val data: Any,
-    val headers: Map<String, String>,
+    val headers: MessageHeaders,
     val context: Context,
+    val params: NodeParams,
     val nodeSource: String
 ) {
 
